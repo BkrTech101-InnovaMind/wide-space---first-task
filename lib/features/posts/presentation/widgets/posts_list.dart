@@ -10,8 +10,8 @@ import 'filter_widget.dart';
 class PostsListWidget extends StatefulWidget {
   PostsListWidget({
     required this.postsContext,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BuildContext postsContext;
   bool searchFocus = false;
