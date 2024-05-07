@@ -16,13 +16,13 @@ import '../../../data/models/user_model.dart';
 
 class ReviewsScreen extends StatefulWidget {
   final UserModel user;
-  bool other = true;
+  final bool other;
 
-  ReviewsScreen({
-    Key? key,
+  const ReviewsScreen({
+    super.key,
     required this.user,
     required this.other,
-  }) : super(key: key);
+  });
 
   @override
   State<ReviewsScreen> createState() => _ReviewsScreenState();
@@ -212,9 +212,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 }
 
 class ReviewsRatingWidget extends StatelessWidget {
-  ReviewsRatingWidget({Key? key, required this.initialRating})
-      : super(key: key);
-  double initialRating;
+  const ReviewsRatingWidget({super.key, required this.initialRating});
+  final double initialRating;
 
   @override
   Widget build(BuildContext context) {
@@ -357,12 +356,12 @@ class ReviewsRatingWidget extends StatelessWidget {
 }
 
 class MakeReviewWidget extends StatelessWidget {
-  MakeReviewWidget({
-    Key? key,
+  const MakeReviewWidget({
+    super.key,
     required this.user,
     required this.initialRating,
     required this.other,
-  }) : super(key: key);
+  });
   final UserModel user;
   final double initialRating;
   final bool other;
