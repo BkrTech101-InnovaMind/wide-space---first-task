@@ -43,7 +43,9 @@ class _RecordButton extends State<RecordButton> {
       child: Consumer<SoundRecordNotifier>(
         builder: (context, value, _) {
           return Directionality(
-            textDirection: Directionality.of(context) == TextDirection.rtl ? TextDirection.ltr : TextDirection.rtl,
+            textDirection: Directionality.of(context) == TextDirection.rtl
+                ? TextDirection.ltr
+                : TextDirection.rtl,
             child: makeBody(value),
           );
         },
@@ -69,7 +71,9 @@ class _RecordButton extends State<RecordButton> {
       return Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(8.0)),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -82,7 +86,8 @@ class _RecordButton extends State<RecordButton> {
                   onPressed: () async {
                     soundRecordNotifier.isShow = false;
 
-                    if (soundRecordNotifier.second >= 1 || soundRecordNotifier.minute > 0) {
+                    if (soundRecordNotifier.second >= 1 ||
+                        soundRecordNotifier.minute > 0) {
                       String path = await state.stop();
                       widget.onSubmit(File.fromUri(Uri(path: path)));
                     }
@@ -150,8 +155,11 @@ class _RecordButton extends State<RecordButton> {
         duration: Duration(milliseconds: soundRecordNotifier.isShow ? 0 : 1),
         height: 48,
         margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-        width: soundRecordNotifier.isShow ? MediaQuery.of(context).size.width : 48,
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: BorderRadius.circular(8.0)),
+        width:
+            soundRecordNotifier.isShow ? MediaQuery.of(context).size.width : 48,
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(8.0)),
         child: Padding(
           padding: EdgeInsetsDirectional.only(start: state.edge),
           child: Stack(
@@ -233,7 +241,9 @@ class _LockRecordState extends State<LockRecord> with TickerProviderStateMixin {
       child: Transform.translate(
         offset: Offset(
           0,
-          (48 - widget.soundRecorderState.heightPosition < 0) ? -70 : -(widget.soundRecorderState.heightPosition + 70),
+          (48 - widget.soundRecorderState.heightPosition < 0)
+              ? -70
+              : -(widget.soundRecorderState.heightPosition + 70),
         ),
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
@@ -328,7 +338,7 @@ class SoundRecordNotifier extends ChangeNotifier {
   double last = 0;
 
   /// recording mp3 sound Object
-  Record recordMp3 = Record();
+  AudioRecorder recordMp3 = AudioRecorder();
 
   /// used to update state when user draggable to the top state
   double currentButtonHeihtPlace = 0;
@@ -526,7 +536,8 @@ class SoundRecordNotifier extends ChangeNotifier {
     } else {
       isShow = true;
       buttonPressed = true;
-      _timer = Timer(const Duration(milliseconds: 300), recordMp3.start);
+      _timer =
+          Timer(const Duration(milliseconds: 300), () async => recordMp3.start);
       _mapCounterGenerater();
       notifyListeners();
     }
