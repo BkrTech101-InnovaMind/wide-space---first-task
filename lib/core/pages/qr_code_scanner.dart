@@ -5,7 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 class QRCodeScanPage extends StatefulWidget {
   final String title;
 
-  const QRCodeScanPage({Key? key, required this.title}) : super(key: key);
+  const QRCodeScanPage({super.key, required this.title});
 
   @override
   State<StatefulWidget> createState() => _QRCodeScanPageState();
@@ -13,7 +13,6 @@ class QRCodeScanPage extends StatefulWidget {
 
 class _QRCodeScanPageState extends State<QRCodeScanPage> {
   late MobileScannerController controller;
-  final _qrKey = GlobalKey(debugLabel: 'QR');
   MobileScannerController cameraController = MobileScannerController();
 
   @override
@@ -26,13 +25,16 @@ class _QRCodeScanPageState extends State<QRCodeScanPage> {
             IconButton(
               color: Colors.white,
               icon: ValueListenableBuilder(
-                valueListenable: cameraController.torchState,
+                valueListenable: cameraController,
                 builder: (context, state, child) {
                   switch (state as TorchState) {
                     case TorchState.off:
                       return const Icon(Icons.flash_off, color: Colors.grey);
                     case TorchState.on:
                       return const Icon(Icons.flash_on, color: Colors.yellow);
+                    default:
+                      TorchState.auto;
+                      return const Icon(Icons.flash_auto, color: Colors.grey);
                   }
                 },
               ),
@@ -42,7 +44,7 @@ class _QRCodeScanPageState extends State<QRCodeScanPage> {
             IconButton(
               color: Colors.white,
               icon: ValueListenableBuilder(
-                valueListenable: cameraController.cameraFacingState,
+                valueListenable: cameraController,
                 builder: (context, state, child) {
                   switch (state as CameraFacing) {
                     case CameraFacing.front:
@@ -58,13 +60,12 @@ class _QRCodeScanPageState extends State<QRCodeScanPage> {
           ],
         ),
         body: MobileScanner(
-            allowDuplicates: false,
             controller: cameraController,
-            onDetect: (barcode, args) {
-              if (barcode.rawValue == null) {
+            onDetect: (barcode) {
+              if (barcode.raw == null) {
                 debugPrint('Failed to scan Barcode');
               } else {
-                final String code = barcode.rawValue!;
+                final String code = barcode.raw.toString();
                 Get.back(
                   result: code,
                 );

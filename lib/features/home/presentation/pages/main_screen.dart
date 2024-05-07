@@ -4,12 +4,10 @@ import 'package:ebn_balady/features/home/presentation/pages/home_screen.dart';
 import 'package:ebn_balady/features/home/presentation/pages/settings.dart';
 import 'package:ebn_balady/features/my_friends/presentation/pages/my_friends.dart';
 import 'package:feature_discovery/feature_discovery.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:material_dialogs/material_dialogs.dart';
@@ -23,7 +21,7 @@ import '../utils/menu_items.dart';
 import 'drawer.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
   static late AnimationController animationController;
 
   @override

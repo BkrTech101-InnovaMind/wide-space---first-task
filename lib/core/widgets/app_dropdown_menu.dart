@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AppDropDownMenu extends StatefulWidget {
   const AppDropDownMenu(
-      {Key? key,
+      {super.key,
       required this.text,
       this.items,
       this.style,
@@ -12,8 +12,7 @@ class AppDropDownMenu extends StatefulWidget {
       this.onSaved,
       this.textValidator,
       required this.color,
-      required this.selectedValue})
-      : super(key: key);
+      required this.selectedValue});
   final String text;
   final String? selectedValue;
   final TextStyle? style;
@@ -51,16 +50,19 @@ class _AppDropDownMenuState extends State<AppDropDownMenu> {
           widget.text,
           style: widget.style,
         ),
-        icon: const Icon(
-          Icons.arrow_drop_down,
-          color: Colors.black45,
+        buttonStyleData: ButtonStyleData(
+          height: 60,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: Theme.of(context).scaffoldBackgroundColor),
+          padding: const EdgeInsets.only(left: 20, right: 10),
         ),
-        iconSize: 30,
-        buttonHeight: 60,
-        buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-        dropdownDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Theme.of(context).scaffoldBackgroundColor),
+        iconStyleData: const IconStyleData(
+          icon: Icon(
+            Icons.arrow_drop_down,
+            color: Colors.black45,
+          ),
+        ),
         items: widget.items,
         validator: (value) {
           if (value == null) {

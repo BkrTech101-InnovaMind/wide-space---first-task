@@ -29,7 +29,6 @@ import 'core/constants.dart';
 import 'core/data_providers/local_data_provider.dart';
 import 'core/data_providers/remote_data_provider.dart';
 import 'core/network/data_source_url.dart';
-import 'features/posts/data/repositories/comments_repository.dart';
 import 'features/posts/data/repositories/posts_repository.dart';
 import 'features/posts/presentation/states manager/comment_like_bloc/comment_like_bloc.dart';
 import 'features/posts/presentation/states manager/like_bloc/like_bloc.dart';

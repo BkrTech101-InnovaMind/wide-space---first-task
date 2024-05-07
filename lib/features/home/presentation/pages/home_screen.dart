@@ -21,12 +21,12 @@ import '../../../user/presentation/pages/profile/view_profile.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
-    Key? key,
+    super.key,
     required this.onSelectedIndex,
     required this.selectedIndex,
     required this.isPlaying,
     required this.floatingIcon,
-  }) : super(key: key);
+  });
   late String title;
   final ValueChanged<int> onSelectedIndex;
   int selectedIndex;
@@ -109,42 +109,6 @@ class _HomeScreenState extends State<HomeScreen>
                     children: screens,
                   ),
                 ),
-                // NestedScrollView(
-                //   // controller: PostsScreen.scrollController,
-                //   physics: const AlwaysScrollableScrollPhysics(),
-                //   floatHeaderSlivers: true,
-                //   headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                //     SliverAppBar(
-                //       leading: IconButton(
-                //         onPressed: () => toggle(),
-                //         icon: AnimatedIcon(
-                //             icon: AnimatedIcons.menu_arrow,
-                //             progress: MainScreen.animationController),
-                //       ),
-                //       backgroundColor: Colors.transparent,
-                //       elevation: 0,
-                //       snap: true,
-                //       title: Text(getTitle()),
-                //       floating: true,
-                //       centerTitle: false,
-                //       actions: widget.selectedIndex == 0
-                //           ? [
-                //               IconButton(
-                //                   onPressed: () {
-                //                     Get.to(() => const NotificationsScreen());
-                //                   },
-                //                   icon: const Icon(Icons.notifications)),
-                //             ]
-                //           : null,
-                //     ),
-                //   ],
-                //   body: SizedBox(
-                //     child: IndexedStack(
-                //       index: widget.selectedIndex,
-                //       children: screens,
-                //     ),
-                //   ),
-                // ),
                 if (state is MapListView)
                   Positioned(
                     left: 0,
@@ -375,9 +339,9 @@ class BottomNavigationCustomPainter extends CustomPainter {
 }
 
 class CustomAppBar extends StatefulWidget {
-  String title;
+  final String title;
 
-  CustomAppBar({Key? key, required this.title}) : super(key: key);
+  const CustomAppBar({super.key, required this.title});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();

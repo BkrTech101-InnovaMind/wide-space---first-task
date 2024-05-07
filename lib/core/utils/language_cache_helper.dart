@@ -13,5 +13,6 @@ class LanguageCacheHelper {
     // } else {
     //   return Platform.localeName;
     // }
+    return null;
   }
 }

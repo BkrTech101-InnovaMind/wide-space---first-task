@@ -12,7 +12,7 @@ enum SessionStatus {
 
 mixin SessionMixin<T extends StatefulWidget>
     on State<T>, WidgetsBindingObserver {
-  static late SessionStatus sessionStatus = SessionStatus.disabled;
+  static SessionStatus sessionStatus = SessionStatus.disabled;
 
   final _lastKnownStateKey = 'lastKnownStateKey';
   final _backgroundedTimeKey = 'backgroundedTimeKey';
@@ -54,6 +54,9 @@ mixin SessionMixin<T extends StatefulWidget>
         _inactive();
         break;
       case AppLifecycleState.detached:
+        // TODO: Handle this case.
+        break;
+      case AppLifecycleState.hidden:
         // TODO: Handle this case.
         break;
     }

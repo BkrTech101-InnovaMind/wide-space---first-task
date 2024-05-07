@@ -203,7 +203,7 @@ class DrawMenu extends StatelessWidget {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Theme.of(context).colorScheme.error,
                         ),
                       ),
                     ),
