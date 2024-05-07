@@ -11,4 +11,6 @@ class ArabicStrings implements FlutterPwValidatorStrings {
   final String specialCharacters = '- رمز خاص';
   @override
   final String normalLetters = '- حرف';
+  @override
+  final String lowercaseLetters = "- حرف صغير";
 }
