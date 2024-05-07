@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
+import 'package:argon_buttons_flutter_fix/argon_buttons_flutter.dart';
 import 'package:ebn_balady/core/constants.dart';
 import 'package:ebn_balady/features/home/presentation/pages/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +20,11 @@ import '../../data/models/user_model.dart';
 import '../manager/user_bloc.dart';
 
 class VerifyScreen extends StatefulWidget {
-  const VerifyScreen({Key? key, required this.currentUser}) : super(key: key);
+  const VerifyScreen({super.key, required this.currentUser});
   final UserModel currentUser;
 
   @override
-  _VerifyScreenState createState() => _VerifyScreenState();
+  State<VerifyScreen> createState() => _VerifyScreenState();
 }
 
 class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
@@ -46,7 +46,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
         body: BlocProvider(
           create: (context) => sl<UserBloc>(),
           child: BlocConsumer<UserBloc, UserState>(
-            listener: (_context, state) {
+            listener: (context, state) {
               logger.d('state listener is $state');
 
               if (state is ReSendOTPError) {
@@ -67,7 +67,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                 Get.offAll(() => const MainScreen());
               }
             },
-            builder: (_context, state) {
+            builder: (context, state) {
               logger.d('state builder is $state');
               return SingleChildScrollView(
                 child: Container(
@@ -111,7 +111,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                                                       .appName,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline1
+                                                  .headlineLarge
                                                   ?.copyWith(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -130,7 +130,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                                       AppLocalizations.of(context)!.appSlogan,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline6
+                                          .headlineLarge
                                           ?.copyWith(
                                               height: 1.4,
                                               fontWeight: FontWeight.w400),
@@ -152,7 +152,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                                   '${AppLocalizations.of(context)!.enterCode} ${widget.currentUser.phones![0].substring(3)}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyText1!
+                                      .bodyLarge!
                                       .copyWith(
                                           fontSize: 14,
                                           color: Theme.of(context)
@@ -216,7 +216,7 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                                 onCompleted: (v) {
                                   if (!isLoading) {
                                     isLoading = true;
-                                    BlocProvider.of<UserBloc>(_context).add(
+                                    BlocProvider.of<UserBloc>(context).add(
                                         VerifyOTP(
                                             otp: textEditingController.text));
                                   }
@@ -247,23 +247,23 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
 
                                     isLoading = true;
 
-                                    BlocProvider.of<UserBloc>(_context).add(
+                                    BlocProvider.of<UserBloc>(context).add(
                                         VerifyOTP(
                                             otp: textEditingController.text));
                                   })),
                           const SizedBox(
                             height: 8.0,
                           ),
-                          ArgonTimerButton(
+                          ArgonButton(
                             splashColor: Colors.transparent,
                             height: 50,
                             width: ScreenUtil.screenWidth,
                             minWidth: ScreenUtil.screenWidth,
                             highlightColor: Colors.transparent,
                             highlightElevation: 0,
-                            onTap: (startTimer, btnState) {
+                            onTap: (startTimer, stopTimer, btnState) {
                               if (btnState == ButtonState.Idle) {
-                                BlocProvider.of<UserBloc>(_context)
+                                BlocProvider.of<UserBloc>(context)
                                     .add(const ReSendOTP());
                                 startTimer(60);
                               }
@@ -274,16 +274,13 @@ class _VerifyScreenState extends State<VerifyScreen> with LoadingStateMixin {
                                     context: context);
                               }
                             },
-                            initialTimer: 60,
-                            loader: (timeLeft) {
-                              return Text(
-                                '${AppLocalizations.of(context)!.resendCode} $timeLeft',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .copyWith(color: Colors.grey),
-                              );
-                            },
+                            loader: Text(
+                              AppLocalizations.of(context)!.resendCode,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(color: Colors.grey),
+                            ),
                             color: Colors.transparent,
                             elevation: 0,
                             child: Text(
