@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
+import 'package:argon_buttons_flutter_fix/argon_buttons_flutter.dart';
 import 'package:ebn_balady/core/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,9 +22,9 @@ class ForgetPasswordBottomSheet extends StatefulWidget {
   final String? phoneNumber;
 
   const ForgetPasswordBottomSheet({
-    Key? key,
+    super.key,
     this.phoneNumber,
-  }) : super(key: key);
+  });
 
   @override
   State<ForgetPasswordBottomSheet> createState() =>
@@ -40,6 +40,8 @@ class ForgetPasswordBottomSheet extends StatefulWidget {
         isScrollControlled: true,
         isDismissible: false,
         ignoreSafeArea: true);
+
+    return phoneNumber;
   }
 }
 
@@ -392,14 +394,14 @@ class _ForgetPasswordBottomSheetState extends State<ForgetPasswordBottomSheet>
             ],
           ),
         ),
-        ArgonTimerButton(
+        ArgonButton(
           splashColor: Colors.transparent,
           height: 50,
           width: ScreenUtil.screenWidth,
           minWidth: ScreenUtil.screenWidth,
           highlightColor: Colors.transparent,
           highlightElevation: 0,
-          onTap: (startTimer, btnState) {
+          onTap: (startTimer, stopTimer, btnState) {
             if (btnState == ButtonState.Idle) {
               BlocProvider.of<UserBloc>(_context).add(const ReSendOTP());
               startTimer(60);
@@ -409,16 +411,14 @@ class _ForgetPasswordBottomSheetState extends State<ForgetPasswordBottomSheet>
                   context: context);
             }
           },
-          initialTimer: 60,
-          loader: (timeLeft) {
-            return Text(
-              "${AppLocalizations.of(context)!.resendCode} $timeLeft",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(color: Colors.grey),
-            );
-          },
+          // initialTimer: 60,
+          loader: Text(
+            AppLocalizations.of(context)!.resendCode,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: Colors.grey),
+          ),
           color: Colors.transparent,
           elevation: 0,
           child: Text(
