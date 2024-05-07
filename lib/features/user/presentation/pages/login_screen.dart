@@ -358,7 +358,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: AvatarGlow(
-                                      endRadius: 24.0,
                                       glowColor:
                                           Theme.of(context).colorScheme.error,
                                       repeat: true,
@@ -601,7 +600,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: AvatarGlow(
-            endRadius: 24.0,
             glowColor: Theme.of(context).colorScheme.primary,
             repeat: true,
             child: IconButton(
