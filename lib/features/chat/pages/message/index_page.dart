@@ -23,7 +23,7 @@ final messagesProvider = StateNotifierProvider.autoDispose<MessagesNotifier,
     PagingController<int, Message>>(
   (ref) {
     return MessagesNotifier(
-      read: ref.read,
+      ref: ref,
       repository: ref.watch(messagesRepositoryProvider).value,
     );
   },
@@ -469,7 +469,7 @@ class ConversationMessageIndexPageState
         duration: const Duration(milliseconds: 600),
         curve: Curves.ease,
       );
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content:

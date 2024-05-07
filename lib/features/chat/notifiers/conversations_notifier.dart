@@ -15,21 +15,22 @@ final unreadMessagesCountProvider = StateProvider.autoDispose<int>(
 
 /// An object that controls a list of [Conversation].
 class ConversationsNotifier extends PagingNotifier<Conversation> {
-  final Reader read;
+  final Ref ref;
 
-  ConversationsNotifier(this.read)
+  ConversationsNotifier(this.ref)
       : super(
           fetch: (Map<String, dynamic> paging) {
-            return read(conversationsRepositoryProvider).index({
+            return ref.read(conversationsRepositoryProvider).index({
               ...paging,
               'with': 'last_message',
             });
           },
         ) {
     state.addListener(() {
-      read(unreadMessagesCountProvider.notifier).state = (state.itemList ?? [])
-          .where((conversation) => conversation.lastMessage!.isNotSeen)
-          .length;
+      ref.read(unreadMessagesCountProvider.notifier).state =
+          (state.itemList ?? [])
+              .where((conversation) => conversation.lastMessage!.isNotSeen)
+              .length;
     });
 
     Future.wait([
@@ -49,19 +50,19 @@ class ConversationsNotifier extends PagingNotifier<Conversation> {
   // TODO: use [currentConversaiton] instead
   void addOrUpdate(Conversation conversation) {
     final isExits = state.itemList?.firstWhereOrNull(
-            (_conversation) => _conversation.id == conversation.id) !=
+            (conversation) => conversation.id == conversation.id) !=
         null;
 
     if (isExits) {
       state = state
         ..itemList = [
-          for (final _conversation in state.itemList!)
+          for (final conversation in state.itemList!)
 
             /// If same id then update the value by the given one
-            if (_conversation.id == conversation.id)
+            if (conversation.id == conversation.id)
               conversation
             else
-              _conversation
+              conversation
         ];
     } else {
       state = state

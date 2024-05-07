@@ -12,11 +12,11 @@ import '../../widgets/conversation_tile.dart';
 final conversationsProvider = StateNotifierProvider.autoDispose<
     ConversationsNotifier, PagingController<int, Conversation>>(
   (ref) {
-    return ConversationsNotifier(ref.read);
+    return ConversationsNotifier(ref);
   },
   dependencies: [
     conversationsRepositoryProvider,
-    unreadMessagesCountProvider.notifier,
+    unreadMessagesCountProvider,
     // messagesProvider.notifier,
   ],
 );

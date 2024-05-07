@@ -8,19 +8,20 @@ import '../pages/conversation/index.dart';
 class MessagesNotifier extends StateNotifier<PagingController<int, Message>> {
   static const _pageSize = 15;
 
-  final Reader read;
+  final Ref ref;
   // ignore: prefer_typing_uninitialized_variables
   final repository;
 
-  MessagesNotifier({required this.read, required this.repository})
+  MessagesNotifier({required this.ref, required this.repository})
       : super(PagingController<int, Message>(firstPageKey: 0)) {
     if (repository != null) {
       _fetchPage(0);
       state.addPageRequestListener(_fetchPage);
 
-      // Mark last conversation message as read
+      // Mark last conversation message as ref
       state.addListener(() {
-        read(conversationsProvider.notifier)
+        ref
+            .read(conversationsProvider.notifier)
             .addOrUpdate(repository.conversation..lastMessage!.isSeen = true);
       });
     }
@@ -53,7 +54,7 @@ class MessagesNotifier extends StateNotifier<PagingController<int, Message>> {
     // Add to list
 
     if (mounted) {
-      read(conversationsProvider.notifier).addLastMessage(message);
+      ref.read(conversationsProvider.notifier).addLastMessage(message);
 
       state = state
         ..itemList = [
