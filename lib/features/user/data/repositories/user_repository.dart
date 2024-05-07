@@ -55,7 +55,7 @@ class UserRepository extends Repository {
               cacheKey: 'CACHED_USER',
             );
           } on OfflineException catch (e, s) {
-            di.logger.d('login catch', e, s);
+            di.logger.d('login catch', error: e, stackTrace: s);
             rethrow;
           }
           return remoteData;
@@ -89,7 +89,7 @@ class UserRepository extends Repository {
             cacheKey: 'CACHED_USER',
           );
         } on OfflineException catch (e, s) {
-          di.logger.d('signup catch', e, s);
+          di.logger.d('signup catch', error: e, stackTrace: s);
           rethrow;
         }
 
@@ -130,7 +130,7 @@ class UserRepository extends Repository {
             body: user.toFormData(),
           );
         } on OfflineException catch (e, s) {
-          di.logger.d('edit profile catch', e, s);
+          di.logger.d('edit profile catch', error: e, stackTrace: s);
           rethrow;
         }
         return remoteData;
@@ -153,7 +153,7 @@ class UserRepository extends Repository {
             returnType: Map,
           );
         } on OfflineException catch (e, s) {
-          di.logger.d('get user info catch', e, s);
+          di.logger.d('get user info catch', error: e, stackTrace: s);
           rethrow;
         }
         return remoteData;
@@ -180,7 +180,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('change password catch', e, s);
+      di.logger.d('change password catch', error: e, stackTrace: s);
       rethrow;
     }
   }
@@ -205,7 +205,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('send verify otp catch', e, s);
+      di.logger.d('send verify otp catch', error: e, stackTrace: s);
       rethrow;
     }
   }
@@ -225,7 +225,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('resend otp catch', e, s);
+      di.logger.d('resend otp catch', error: e, stackTrace: s);
       rethrow;
     }
   }
@@ -249,7 +249,8 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('forget password catch', e, s);
+      di.logger.d('forget password catch', error: e, stackTrace: s);
+      print({e, s});
       rethrow;
     }
   }
@@ -279,7 +280,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('reset password catch', e, s);
+      di.logger.d('reset password catch', error: e, stackTrace: s);
       rethrow;
     }
   }
@@ -299,7 +300,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('get services points catch', e, s);
+      di.logger.d('get services points catch', error: e, stackTrace: s);
       rethrow;
     }
   }
@@ -327,7 +328,7 @@ class UserRepository extends Repository {
         },
       );
     } on OfflineException catch (e, s) {
-      di.logger.d('get directions catch', e, s);
+      di.logger.d('get directions catch', error: e, stackTrace: s);
       rethrow;
     }
   }

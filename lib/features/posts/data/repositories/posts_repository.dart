@@ -24,7 +24,7 @@ class PostsRepository extends Repository {
               cacheKey: 'CACHED_POSTS',
             );
           } catch (e, s) {
-            di.logger.d('Get posts catch', e, s);
+            di.logger.d('Get posts catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -65,7 +65,7 @@ class PostsRepository extends Repository {
               returnType: Map,
             );
           } catch (e, s) {
-            di.logger.d('Get a post catch', e, s);
+            di.logger.d('Get a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -98,7 +98,7 @@ class PostsRepository extends Repository {
               body: post.toFormData(),
             );
           } catch (e, s) {
-            di.logger.d('Add a post catch', e, s);
+            di.logger.d('Add a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -120,7 +120,7 @@ class PostsRepository extends Repository {
               returnType: int,
             );
           } catch (e, s) {
-            di.logger.d('Delete a post catch', e, s);
+            di.logger.d('Delete a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -143,7 +143,7 @@ class PostsRepository extends Repository {
               body: post.toFormData(),
             );
           } catch (e, s) {
-            di.logger.d('Delete a post catch', e, s);
+            di.logger.d('Delete a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -165,7 +165,7 @@ class PostsRepository extends Repository {
               returnType: Map,
             );
           } catch (e, s) {
-            di.logger.d('Add a like to a post catch', e, s);
+            di.logger.d('Add a like to a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -196,7 +196,8 @@ class PostsRepository extends Repository {
               returnType: Map,
             );
           } catch (e, s) {
-            di.logger.d('Delete a like from a post catch', e, s);
+            di.logger
+                .d('Delete a like from a post catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 
@@ -228,7 +229,7 @@ class PostsRepository extends Repository {
               cacheKey: 'CACHED_USERS',
             );
           } catch (e, s) {
-            di.logger.d('Get Users catch', e, s);
+            di.logger.d('Get Users catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
 

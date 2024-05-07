@@ -12,7 +12,7 @@ import '../states manager/locale_cubit.dart';
 import 'onboarding.dart';
 
 class LanguageSelector extends StatelessWidget {
-  LanguageSelector({Key? key}) : super(key: key);
+  LanguageSelector({super.key});
 
   late int index;
   final items = [

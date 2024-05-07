@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' as _get;
+import 'package:get/get.dart' as gett;
 import 'package:oauth_dio/oauth_dio.dart';
 
 import '../../injection_container.dart' as di;
@@ -30,8 +30,8 @@ class RemoteDataProvider {
     di.logger.d(url);
     Response response;
     client.options.headers.addAll({
-      'x-locale': _get.Get.locale?.languageCode ??
-          _get.Get.deviceLocale?.languageCode ??
+      'x-locale': gett.Get.locale?.languageCode ??
+          gett.Get.deviceLocale?.languageCode ??
           'ar'
     });
     try {
@@ -161,7 +161,7 @@ class RemoteDataProvider {
         throw UnexpectedException();
       }
     } catch (e, s) {
-      di.logger.d('remote catch', e, s);
+      di.logger.d('remote catch', error: e, stackTrace: s);
       rethrow;
     }
   }

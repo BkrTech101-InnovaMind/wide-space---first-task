@@ -24,7 +24,7 @@ class CommentsRepository extends Repository {
               returnType: List,
             );
           } catch (e, s) {
-            di.logger.d('Get comments catch', e, s);
+            di.logger.d('Get comments catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -46,7 +46,7 @@ class CommentsRepository extends Repository {
               body: {"body": comment},
             );
           } catch (e, s) {
-            di.logger.d('Add a comment catch', e, s);
+            di.logger.d('Add a comment catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -79,7 +79,7 @@ class CommentsRepository extends Repository {
               retrievedDataType: CommentModel.init(),
             );
           } catch (e, s) {
-            di.logger.d('Delete a comment catch', e, s);
+            di.logger.d('Delete a comment catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -104,7 +104,7 @@ class CommentsRepository extends Repository {
               body: {"body": comment.body},
             );
           } catch (e, s) {
-            di.logger.d('Update comment catch', e, s);
+            di.logger.d('Update comment catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -126,7 +126,8 @@ class CommentsRepository extends Repository {
               retrievedDataType: CommentModel.init(),
             );
           } catch (e, s) {
-            di.logger.d('Add a like to a comment catch', e, s);
+            di.logger
+                .d('Add a like to a comment catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -148,7 +149,8 @@ class CommentsRepository extends Repository {
               retrievedDataType: CommentModel.init(),
             );
           } catch (e, s) {
-            di.logger.d('Remove a like from a comment catch', e, s);
+            di.logger.d('Remove a like from a comment catch',
+                error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -170,7 +172,8 @@ class CommentsRepository extends Repository {
               returnType: Map,
             );
           } catch (e, s) {
-            di.logger.d('Add a dislike to a comment catch', e, s);
+            di.logger
+                .d('Add a dislike to a comment catch', error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;
@@ -192,7 +195,8 @@ class CommentsRepository extends Repository {
               returnType: Map,
             );
           } catch (e, s) {
-            di.logger.d('Remove a dislike from a comment catch', e, s);
+            di.logger.d('Remove a dislike from a comment catch',
+                error: e, stackTrace: s);
             return throw UnexpectedException();
           }
           return remoteData;

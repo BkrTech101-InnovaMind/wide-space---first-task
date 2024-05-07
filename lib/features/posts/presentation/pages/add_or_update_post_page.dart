@@ -10,7 +10,7 @@ import '../states manager/posts_bloc/posts_bloc.dart';
 import '../widgets/form_widget.dart';
 
 class AddOrUpdatePostPage extends StatefulWidget {
-  const AddOrUpdatePostPage({Key? key, this.post}) : super(key: key);
+  const AddOrUpdatePostPage({super.key, this.post});
   final PostModel? post;
 
   @override

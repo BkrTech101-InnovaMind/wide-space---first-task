@@ -62,7 +62,7 @@ class Repository {
       } on EmptyCacheException {
         return Left(EmptyCacheFailure());
       } catch (e, s) {
-        di.logger.d("Exception", e, s);
+        di.logger.d("Exception", error: e, stackTrace: s);
         return Left(ServerFailure());
       }
     }

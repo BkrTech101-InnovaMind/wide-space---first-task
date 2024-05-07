@@ -193,7 +193,7 @@ Future<UserModel> getCachedUser() async {
       ),
     );
   } catch (e) {
-    logger.e('getCachedUser error', e);
+    logger.e('getCachedUser error', error: e);
     return await Future.value(UserModel.init());
   }
 }
@@ -258,7 +258,7 @@ void launchURL(String uri) async {
       throw 'Could not launch ${url()}';
     }
   } catch (e, s) {
-    logger.e('launchURL Error', e, s);
+    logger.e('launchURL Error', error: e, stackTrace: s);
   }
 }
 

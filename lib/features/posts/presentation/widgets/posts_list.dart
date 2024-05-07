@@ -61,7 +61,6 @@ class _PostsListWidgetState extends State<PostsListWidget> {
               CustomScrollView(
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
-                // physics: const AlwaysScrollableScrollPhysics(),
                 controller: PostsScreen.scrollController,
                 slivers: [
                   const SliverToBoxAdapter(
