@@ -15,12 +15,12 @@ import '../../widgets/profile/profile_view.dart';
 import '../../widgets/profile/user_shimmer.dart';
 
 class ViewProfileScreen extends StatefulWidget {
-  ViewProfileScreen({
+  const ViewProfileScreen({
     this.other = true,
     required this.user,
-    Key? key,
-  }) : super(key: key);
-  bool other;
+    super.key,
+  });
+  final bool other;
   final UserModel user;
 
   @override
@@ -31,10 +31,10 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
   @override
   Widget build(BuildContext context) {
     if (widget.other) {
-      return WillPopScope(
-        onWillPop: () async {
-          BlocProvider.of<UserBloc>(context).add(const GetMyProfileData());
-          return true;
+      return PopScope(
+        onPopInvoked: (_) async {
+          return BlocProvider.of<UserBloc>(context)
+              .add(const GetMyProfileData());
         },
         child: Scaffold(
           body: NestedScrollView(
